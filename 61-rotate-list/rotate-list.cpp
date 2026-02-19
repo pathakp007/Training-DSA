@@ -14,7 +14,7 @@ public:
         if(!head || !head->next || k == 0){
             return head;
         }
-        
+
         ListNode* temp = head;
         int n = 1;
         while (temp->next) {
