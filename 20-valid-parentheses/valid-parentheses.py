@@ -4,7 +4,11 @@ class Solution:
         mapping = {')': '(', ']': '[', '}': '{'}
         for char in s:
             if char in mapping:
-                top_element = stack.pop() if stack else '#'
+                if stack:
+                    top_element = stack.pop()
+                else:
+                    top_element = '#' 
+                    
                 if mapping[char] != top_element:
                     return False
             else:
