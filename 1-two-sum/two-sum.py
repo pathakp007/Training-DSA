@@ -6,3 +6,4 @@ class Solution:
             if res in m:
                 return[m[res],i]
             m[j]=i
+            
