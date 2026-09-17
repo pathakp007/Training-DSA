@@ -5,7 +5,7 @@ public:
 
         long long totalSum = 0;
 
-        for (int &x : nums) {
+        for (int x : nums) {
             totalSum += x;
         }
 
