@@ -1,41 +1,45 @@
 class Solution {
 public:
-int n, m;
-vector<vector<int>> directions{{0,1},{0,-1},{1,0},{-1,0}};
     vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
-        n = mat.size();
-        m = mat[0].size();
+        int m = mat.size();
+        int n = mat[0].size();
 
-        queue<pair<int,int>> que;
-        vector<vector<int>> result(n, vector<int>(m, -1));
+        queue<pair<int,int>> q;
 
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < m; j++){
-                if(mat[i][j] == 0){
-                    result[i][j] = 0;
-                    que.push({i,j});
+        int dr[4] = {-1, 1, 0, 0};
+        int dc[4] = {0, 0, -1, 1};
+
+        vector<vector<int>> dist(m, vector<int>(n, -1));
+
+        // All 0s are sources
+        for(int r = 0; r < m; r++) {
+            for(int c = 0; c < n; c++) {
+                if(mat[r][c] == 0) {
+                    q.push({r, c});
+                    dist[r][c] = 0;
                 }
             }
         }
 
-        while(!que.empty()){
-            pair<int,int> p = que.front();
-            que.pop();
+        while(!q.empty()) {
+            auto [r, c] = q.front();
+            q.pop();
 
-            int i = p.first;
-            int j = p.second;
+            for(int i = 0; i < 4; i++) {
+                int nr = r + dr[i];
+                int nc = c + dc[i];
 
-            for(auto &dir : directions){
-                int new_i = i + dir[0];
-                int new_j = j + dir[1];
+                if(nr < 0 || nc < 0 || nr >= m || nc >= n)
+                    continue;
 
-                if(new_i >= 0 && new_i < n && new_j >= 0 && new_j < m && result[new_i][new_j] == -1){
-                    result[new_i][new_j] = result[i][j] + 1;
-                    que.push({new_i, new_j});
+                // Not visited yet
+                if(dist[nr][nc] == -1) {
+                    dist[nr][nc] = dist[r][c] + 1;
+                    q.push({nr, nc});
                 }
             }
         }
 
-        return result;
+        return dist;
     }
 };
