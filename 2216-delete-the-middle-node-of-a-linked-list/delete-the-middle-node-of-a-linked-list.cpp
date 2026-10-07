@@ -28,7 +28,6 @@ public:
         }
 
         prevslow->next = slow->next;
-        delete(slow);
 
         return head;
     }
