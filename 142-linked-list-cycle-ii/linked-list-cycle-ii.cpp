@@ -10,13 +10,13 @@ class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
         if(head == NULL || head->next == NULL){
-            return NULL;
+            return nullptr;
         }
 
         ListNode* slow = head;
         ListNode* fast = head;
 
-        while(fast != NULL && fast->next != NULL){
+        while(fast != nullptr && fast->next != nullptr){
             slow = slow->next;
             fast = fast->next->next;
 
@@ -26,7 +26,7 @@ public:
         }
 
         if(slow != fast){
-            return NULL;
+            return nullptr;
         }
 
         ListNode* P = head;
