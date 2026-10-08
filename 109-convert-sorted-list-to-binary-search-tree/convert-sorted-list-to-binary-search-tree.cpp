@@ -23,14 +23,14 @@ class Solution {
 public:
     TreeNode* sortedListToBST(ListNode* head) {
         if (!head) {
-            return NULL;
+            return nullptr;
         }
 
         if (!head->next) {
             return new TreeNode(head->val);
         }
 
-        ListNode* slowprev = NULL;
+        ListNode* slowprev = nullptr;
         ListNode* slow = head;
         ListNode* fast = head;
 
@@ -42,7 +42,7 @@ public:
 
         TreeNode* root = new TreeNode(slow->val);
 
-        slowprev->next = NULL;
+        slowprev->next = nullptr;
 
         root->left = sortedListToBST(head);
         root->right = sortedListToBST(slow->next);
